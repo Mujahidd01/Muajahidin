@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Toko Online Milik iid mujahid</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+  <!-- Navbar -->
+  <header class="flex items-center justify-between px-6 py-4 bg-white shadow-md">
+    <h1 class="text-xl font-bold text-blue-600 flex items-center gap-2">
+      <i class="fas fa-store"></i> Toko Online Milik iid mujahid
+    </h1>
+    <div class="flex items-center gap-4">
+      <input type="text" placeholder="Cari produk..." class="px-3 py-2 border rounded-md" />
+      <div class="relative">
+        <i class="fas fa-shopping-cart text-xl"></i>
+        <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">0</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="bg-blue-500 text-white py-12 px-6 rounded-lg mx-6 mt-6">
+    <h2 class="text-3xl font-bold mb-2">Selamat Datang di Toko Online Milik iid mujahid</h2>
+    <p class="text-lg">Temukan berbagai produk berkualitas dengan harga terbaik. Belanja mudah, cepat, dan terpercaya!</p>
+  </section>
+
+  <!-- Kategori -->
+  <div class="flex justify-center gap-4 my-6 flex-wrap">
+    <button class="bg-blue-600 text-white px-4 py-2 rounded-full">Semua Produk</button>
+    <button class="border px-4 py-2 rounded-full">Elektronik</button>
+    <button class="border px-4 py-2 rounded-full">Fashion</button>
+    <button class="border px-4 py-2 rounded-full">Rumah Tangga</button>
+  </div>
+
+  <!-- Produk -->
+  <section class="grid grid-cols-1 md:grid-cols-3 gap-6 px-6">
+    <div class="bg-white shadow-md rounded-lg p-4">
+      <img src="https://via.placeholder.com/300x200?text=iPhone" alt="iPhone" class="rounded-md mb-2 w-full h-40 object-cover" />
+      <h3 class="font-semibold text-lg">iPhone</h3>
+      <p class="text-sm text-gray-600 mb-2">Rp 7.500.000</p>
+      <button onclick="addToCart('iPhone', 7500000)" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">Tambah ke Keranjang</button>
+    </div>
+    <div class="bg-white shadow-md rounded-lg p-4">
+      <img src="https://via.placeholder.com/300x200?text=Headphone" alt="Headphone" class="rounded-md mb-2 w-full h-40 object-cover" />
+      <h3 class="font-semibold text-lg">Headphone</h3>
+      <p class="text-sm text-gray-600 mb-2">Rp 250.000</p>
+      <button onclick="addToCart('Headphone', 250000)" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">Tambah ke Keranjang</button>
+    </div>
+    <div class="bg-white shadow-md rounded-lg p-4">
+      <img src="https://via.placeholder.com/300x200?text=Laptop" alt="Laptop" class="rounded-md mb-2 w-full h-40 object-cover" />
+      <h3 class="font-semibold text-lg">Laptop</h3>
+      <p class="text-sm text-gray-600 mb-2">Rp 4.000.000</p>
+      <button onclick="addToCart('Laptop', 4000000)" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">Tambah ke Keranjang</button>
+    </div>
+  </section>
+
+  <!-- Keranjang -->
+  <section class="bg-white rounded-lg shadow-md p-6 mx-6 my-6">
+    <h3 class="text-xl font-semibold mb-4">Keranjang Belanja</h3>
+    <ul id="cart-list" class="space-y-2 mb-4"></ul>
+    <p class="font-bold">Total: Rp <span id="total">0</span></p>
+    <div class="flex gap-4 mt-4">
+      <button onclick="checkoutWA()" class="flex items-center gap-2 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+        <i class="fab fa-whatsapp"></i> Checkout via WA
+      </button>
+      <button onclick="clearCart()" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+        Batal Semua
+      </button>
+    </div>
+  </section>
+
+  <script>
+    let cart = [];
+
+    function addToCart(name, price) {
+      cart.push({ name, price });
+      updateCart();
+    }
+
+    function updateCart() {
+      const list = document.getElementById('cart-list');
+      const total = document.getElementById('total');
+      const count = document.getElementById('cart-count');
+      list.innerHTML = '';
+      let sum = 0;
+      cart.forEach((item, i) => {
+        const li = document.createElement('li');
+        li.className = 'flex justify-between items-center';
+        li.innerHTML = `${item.name} - Rp ${item.price.toLocaleString('id-ID')} <button onclick="removeItem(${i})" class="text-red-500 hover:underline">Hapus</button>`;
+        list.appendChild(li);
+        sum += item.price;
+      });
+      total.textContent = sum.toLocaleString('id-ID');
+      count.textContent = cart.length;
+    }
+
+    function removeItem(index) {
+      cart.splice(index, 1);
+      updateCart();
+    }
+
+    function clearCart() {
+      if (confirm('Yakin ingin membatalkan semua pesanan?')) {
+        cart = [];
+        updateCart();
+      }
+    }
+
+    function checkoutWA() {
+      if (cart.length === 0) {
+        alert('Keranjang kosong!');
+        return;
+      }
+      const noAdmin = '6283848335154';
+      const pesan = cart.map(item => `- ${item.name} - Rp ${item.price.toLocaleString('id-ID')}`).join('%0A');
+      const total = cart.reduce((sum, item) => sum + item.price, 0);
+      const fullMsg = `Pesanan:%0A${pesan}%0A%0ATotal: Rp ${total.toLocaleString('id-ID')}`;
+      window.open(`https://wa.me/${noAdmin}?text=${fullMsg}`, '_blank');
+    }
+  </script>
+</body>
+</html>
