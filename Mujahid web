@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mujahid - Halaman Web Animasi</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(120deg, #0f2027, #2c5364, #1c92d2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            overflow: hidden;
+        }
+        .container {
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31,38,135,0.37);
+            padding: 40px 60px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+        }
+        h1 {
+            color: #fff;
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            animation: slideIn 1s;
+        }
+        p {
+            color: #e0e0e0;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            animation: fadeIn 2s;
+        }
+        .btn {
+            padding: 12px 32px;
+            background: linear-gradient(90deg, #1c92d2, #f2fcfe);
+            color: #222;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(28,146,210,0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+            animation: popIn 1.5s;
+        }
+        .btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 8px 24px rgba(28,146,210,0.3);
+        }
+        /* Animasi background bubble */
+        .bubble {
+            position: absolute;
+            bottom: -100px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 50%;
+            animation: floatBubble 10s infinite linear;
+            z-index: 1;
+        }
+        .bubble1 { left: 10%; width: 60px; height: 60px; animation-delay: 0s;}
+        .bubble2 { left: 30%; width: 40px; height: 40px; animation-delay: 2s;}
+        .bubble3 { left: 50%; width: 80px; height: 80px; animation-delay: 4s;}
+        .bubble4 { left: 70%; width: 50px; height: 50px; animation-delay: 1s;}
+        .bubble5 { left: 85%; width: 30px; height: 30px; animation-delay: 3s;}
+
+        @keyframes floatBubble {
+            0% { transform: translateY(0) scale(1);}
+            50% { transform: translateY(-400px) scale(1.1);}
+            100% { transform: translateY(-800px) scale(1);}
+        }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(40px);}
+            100% { opacity: 1; transform: translateY(0);}
+        }
+        @keyframes slideIn {
+            0% { opacity: 0; transform: translateX(-60px);}
+            100% { opacity: 1; transform: translateX(0);}
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0;}
+            100% { opacity: 1;}
+        }
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.7);}
+            100% { opacity: 1; transform: scale(1);}
+        }
+    </style>
+</head>
+<body>
+    <div class="bubble bubble1"></div>
+    <div class="bubble bubble2"></div>
+    <div class="bubble bubble3"></div>
+    <div class="bubble bubble4"></div>
+    <div class="bubble bubble5"></div>
+    <div class="container">
+        <h1>Selamat Datang di Halaman Mujahid</h1>
+        <p>Saya adalah seorang mahasiswa informatika Universitas Nahdlatul Ulama Yogyakarta, 
+        <p>Saya terbilang suka mencoba banyak hal yang belum saya ketahui</p>
+        <button class="btn" onclick="alert('Terima kasih sudah berkunjung!')">Klik Saya</button>
+    </div>
+</body>
+</html>
